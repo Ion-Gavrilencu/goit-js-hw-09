@@ -24,13 +24,13 @@ const options = {
 
 flatpickr(dateTimePicker, options);
 
-startButton.addEventListener('click', () => {
+function handleStartButtonClick() {
   const targetDate = new Date(dateTimePicker.value);
-  
+
   if (intervalId) {
     clearInterval(intervalId);
   }
-  
+
   intervalId = setInterval(() => {
     const currentTime = new Date();
     const timeDifference = targetDate - currentTime;
@@ -44,7 +44,9 @@ startButton.addEventListener('click', () => {
 
     updateTimer(timeDifference);
   }, 1000);
-});
+}
+
+startButton.addEventListener('click', handleStartButtonClick);
 
 function updateTimer(timeDifference) {
   const { days, hours, minutes, seconds } = convertMs(timeDifference);
@@ -72,3 +74,4 @@ function convertMs(ms) {
 function addLeadingZero(value) {
   return String(value).padStart(2, '0');
 }
+
